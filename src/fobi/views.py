@@ -1578,7 +1578,10 @@ class FormWizardView(DynamicSessionWizardView):
                     wizard_form_key in form.data
                     and form.data[wizard_form_key]
                 ):
+                    swap = form.data._mutable
+                    form.data._mutable = True
                     form.data[wizard_form_key] = field_value
+                    form.data._mutable = swap
 
                 # This is dirty hack to make wizard validate empty multiple
                 # choice fields. Otherwise it would fail with message
